@@ -1,0 +1,60 @@
+{
+  "extends": [
+    "google"
+  ],
+  "parser": "babel-eslint",
+  "rules": {
+    "one-var": [
+      2,
+      {
+        "uninitialized": "never",
+        "initialized": "never"
+      }
+    ],
+    "no-multi-spaces": 2,
+    "no-trailing-spaces": [
+      2,
+      {
+        "skipBlankLines": true
+      }
+    ],
+    "quotes": [
+      2,
+      "single",
+      {
+        "avoidEscape": true
+      }
+    ],
+    "comma-dangle": ["error", "never"],
+    "valid-jsdoc": [
+      2,
+      {
+        "prefer": {
+          "return": "returns"
+        },
+        "requireParamDescription": false,
+        "requireReturnDescription": false,
+        "requireReturn": false
+      }
+    ],
+    "max-len": 0,
+    "keyword-spacing": "error",
+    "no-invalid-this": 0,
+    // Disallows coercion use like !! or "" + foo. More info: http://eslint.org/docs/rules/no-implicit-coercion
+    "no-implicit-coercion": 2,
+    "padded-blocks": 0,
+    // Begin overrides for google ES2015+ this block could be deleted if we implement ES2015+
+    "arrow-parens": 0,
+    "constructor-super": 0,
+    "generator-star-spacing": 0,
+    "no-new-symbol": 0,
+    "no-this-before-super": 0,
+    "no-var": 0,
+    "prefer-rest-params": 0,
+    "prefer-spread": 0,
+    "rest-spread-spacing": 0,
+    "yield-star-spacing": 0,
+    "quote-props": 0
+    // End ES2015+ overrides
+  }
+}
