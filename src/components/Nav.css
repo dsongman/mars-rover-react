@@ -1,0 +1,25 @@
+.Nav {
+  flex: none;
+  display: flex;
+  align-items: center;
+  padding-left: 3.125%;
+  padding-right: 3.125%;
+  border-bottom: 1px solid #e9e9e9;
+}
+
+/* Trump Ant Design styles */
+.Nav__Menu {
+  flex: 1 1;
+  border-bottom: none;
+}
+
+@media screen and (max-width: 479px) {
+  .Nav__Menu__Item {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
+.Nav__DatePicker {
+  flex: none;
+}
