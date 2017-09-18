@@ -1,0 +1,13 @@
+.Photo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.Photo + .Photo {
+  margin-top: 2em;
+}
+
+.Photo__image {
+  max-width: 100%;
+}
