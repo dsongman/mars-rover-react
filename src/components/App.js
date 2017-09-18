@@ -1,5 +1,5 @@
 import React, {PureComponent} from 'react';
-import Nav from './Nav';
+import NavContainer from './NavContainer';
 import PhotosListContainer from './PhotosListContainer';
 
 import './App.css';
@@ -16,7 +16,7 @@ class App extends PureComponent {
   render() {
     return (
       <div className="App">
-        <Nav />
+        <NavContainer />
         <PhotosListContainer />
       </div>
     );
