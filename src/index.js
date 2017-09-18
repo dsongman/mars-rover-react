@@ -3,8 +3,16 @@ import './index.css';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import {LocaleProvider} from 'antd';
+import App from './components/App';
+
+import enUS from 'antd/lib/locale-provider/en_US';
 import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(
+    <LocaleProvider locale={enUS}>
+      <App />
+    </LocaleProvider>
+  document.getElementById('root')
+);
 registerServiceWorker();
