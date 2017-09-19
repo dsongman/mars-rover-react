@@ -2,17 +2,20 @@ import React, {Component} from 'react';
 import PhotosList from './PhotosList';
 
 import {NASA_API_KEY} from '../_private.js';
+const REQUEST_DATE_FORMAT = 'YYYY-MM-DD';
 
 /**
  * Fetches photos from NASA API.
  * 
- * @param {Date} date
  * @param {String} rover
+ * @param {Moment} date
  * @returns {Promise}
  */
-async function getPhotos(date, rover) {
-  let url = 'https://api.nasa.gov/mars-photos/api/v1/rovers/' + rover + '/photos?sol=1000&api_key=' + NASA_API_KEY;
-  url = 'https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=2017-09-12&api_key=' + NASA_API_KEY;
+async function getPhotos(rover, date) {
+  console.log('PhotosListContainer', rover, date);
+  let _rover = rover[0];
+  let _date = date.format(REQUEST_DATE_FORMAT);
+  let url = 'https://api.nasa.gov/mars-photos/api/v1/rovers/' + _rover + '/photos?earth_date=' + _date + '&api_key=' + NASA_API_KEY;
   try {
     let response = await fetch(url);
     let responseJson = await response.json();
@@ -40,14 +43,21 @@ class PhotosListContainer extends Component {
     };
   }
   /**
-   * @overrides
+   * Manages state around fetching photos
+   * 
+  * @param {String} rover
+  * @param {Moment} date
    * @memberof PhotosListContainer
    */
-  componentWillMount() {
+  getPhotos(rover, date) {
+    if (this.state.isFetching) {
+      return;
+    }
+
     this.setState({
       isFetching: true
     });
-    getPhotos().then((result) => {
+    getPhotos(rover, date).then((result) => {
       this.setState({
         isFetching: false,
         photos: result
@@ -55,10 +65,25 @@ class PhotosListContainer extends Component {
     });
   }
   /**
+   * @overrides
+   * @memberof PhotosListContainer
+   */
+  componentDidMount() {
+    this.getPhotos(this.props.rover, this.props.date);
+  }
+  /**
+   * @overrides
+   * @memberof PhotosListContainer
+   */
+  componentWillReceiveProps(nextProps) {
+    this.getPhotos(nextProps.rover, nextProps.date);
+  }
+  /**
    * @returns {Component}
    * @memberof PhotosListContainer
    */
   render() {
+    console.log('PhotoListContainer:render');
     return (
       <PhotosList photos={this.state.photos} isFetching={this.state.isFetching} />
     );

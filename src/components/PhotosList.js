@@ -16,6 +16,10 @@ function renderPhotos(props) {
     return <p>There was an error fetching the photos.</p>;
   }
   
+  if (props.photos.length === 0) {
+    return <p>No images found.</p>;
+  }
+
   return props.photos.map(photo =>
     <Photo key={photo.id} photo={photo} />
   );
