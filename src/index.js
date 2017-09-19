@@ -8,12 +8,12 @@ import {LocaleProvider} from 'antd';
 import App from './components/App';
 
 import enUS from 'antd/lib/locale-provider/en_US';
+import rootReducer from './reducers';
 import registerServiceWorker from './registerServiceWorker';
 import {createStore} from 'redux';
-import photosApp from './reducers';
 
 let store = createStore(
-  photosApp,
+  rootReducer,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 

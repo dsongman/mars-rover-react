@@ -7,9 +7,9 @@ import rover from './rover';
  * @param {Object} action 
  * @returns {Object}
  */
-const photosApp = combineReducers({
+const rootReducer = combineReducers({
   date,
   rover
 });
 
-export default photosApp;
+export default rootReducer;
