@@ -1,7 +1,7 @@
 import Nav from './Nav';
 
 import {connect} from 'react-redux';
-import {setDate, setRover} from '../actions/actions';
+import {setDate, setRover} from '../actions';
 
 const mapStateToProps = state => {
   return {

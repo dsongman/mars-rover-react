@@ -1,4 +1,4 @@
-import {SET_DATE} from '../actions/actions';
+import {SET_DATE} from '../actions';
 import moment from 'moment';
 
 const today = moment();

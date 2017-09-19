@@ -1,4 +1,4 @@
-import {SET_ROVER} from '../actions/actions';
+import {SET_ROVER} from '../actions';
 
 /**
  * @param {String} [state='curiosity'] 

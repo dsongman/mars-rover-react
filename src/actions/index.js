@@ -1,4 +1,3 @@
-// Nav Actions
 /**
  * @param {Moment} date 
  * @returns {Object}
