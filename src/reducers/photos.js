@@ -1,4 +1,4 @@
-import {REQUEST_PHOTOS, RECEIVE_PHOTOS} from '../actions';
+import {PHOTO_KEY_SEPARATOR, REQUEST_PHOTOS, RECEIVE_PHOTOS} from '../actions';
 
 const defaultRoverState = {
   isFetching: false
@@ -16,10 +16,10 @@ const photos = (state = defaultRoverState, action) => {
         isFetching: true
       });
     case RECEIVE_PHOTOS:
-      var key = action.rover + '-' + action.date;
+      var photosKey = action.rover + PHOTO_KEY_SEPARATOR + action.date;
       return Object.assign({}, state, {
         isFetching: false,
-        [key]: action.json.photos
+        [photosKey]: action.json.photos
       });
     default:
       return state;

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import PhotosList from './PhotosList';
 
 import {connect} from 'react-redux';
-import {getPhotos, REQUEST_DATE_FORMAT} from '../actions';
+import {getPhotos, PHOTO_KEY_SEPARATOR, REQUEST_DATE_FORMAT} from '../actions';
 
 /**
  * @class PhotosListContainer
@@ -49,7 +49,7 @@ class PhotosListContainer extends Component {
 
 const mapStateToProps = state => {
   const {date, rover, photos} = state;
-  const photosKey = rover[0] + '-' + date.format(REQUEST_DATE_FORMAT);
+  const photosKey = rover[0] + PHOTO_KEY_SEPARATOR + date.format(REQUEST_DATE_FORMAT);
   return {
     rover: rover,
     date: date,

@@ -65,9 +65,11 @@ const fetchPhotos = (rover, date) => {
   };
 };
 
+export const PHOTO_KEY_SEPARATOR = '-';
+
 const shouldFetchPhotos = (state, rover, date) => {
   const roverPhotos = state.photos;
-  let photoKey = rover + '-' + date;
+  let photoKey = rover + PHOTO_KEY_SEPARATOR + date;
   const hasPhotosOnDate = Boolean(roverPhotos[photoKey]);
   
   return !(hasPhotosOnDate || roverPhotos.isFetching);
