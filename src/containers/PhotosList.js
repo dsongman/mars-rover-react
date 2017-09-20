@@ -41,8 +41,9 @@ class PhotosListContainer extends Component {
    * @memberof PhotosListContainer
    */
   render() {
+    let date = this.props.date.format('MMMM D, YYYY');
     return (
-      <PhotosList isFetching={this.props.isFetching} photos={this.props.photos} />
+      <PhotosList isFetching={this.props.isFetching} photos={this.props.photos} date={date} />
     );
   }
 }

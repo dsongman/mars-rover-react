@@ -17,7 +17,7 @@ function renderPhotos(props) {
   }
 
   return props.photos.map(photo =>
-    <Photo key={photo.id} photo={photo} />
+    <Photo key={photo.id} photo={photo} date={props.date} />
   );
 }
 
