@@ -1,29 +1,8 @@
 import React, {Component} from 'react';
 import PhotosList from './PhotosList';
 
-import {NASA_API_KEY} from '../_private.js';
-const REQUEST_DATE_FORMAT = 'YYYY-MM-DD';
-
-/**
- * Fetches photos from NASA API.
- * 
- * @param {String} rover
- * @param {Moment} date
- * @returns {Promise}
- */
-async function getPhotos(rover, date) {
-  console.log('PhotosListContainer', rover, date);
-  let _rover = rover[0];
-  let _date = date.format(REQUEST_DATE_FORMAT);
-  let url = 'https://api.nasa.gov/mars-photos/api/v1/rovers/' + _rover + '/photos?earth_date=' + _date + '&api_key=' + NASA_API_KEY;
-  try {
-    let response = await fetch(url);
-    let responseJson = await response.json();
-    return responseJson.photos;
-  } catch (error) {
-    return null;
-  }
-};
+import {connect} from 'react-redux';
+import {getPhotos, REQUEST_DATE_FORMAT} from '../actions';
 
 /**
  * @class PhotosListContainer
@@ -31,63 +10,52 @@ async function getPhotos(rover, date) {
  */
 class PhotosListContainer extends Component {
   /**
-   * Creates an instance of PhotosListContainer.
-   * @memberof PhotosListContainer
-   */
-  constructor() {
-    super();
-    // Set initial state
-    this.state = {
-      isFetching: false,
-      photos: []
-    };
-  }
-  /**
-   * Manages state around fetching photos
+   * Dispatches the getPhotos action.
    * 
-  * @param {String} rover
-  * @param {Moment} date
+   * @param {Array} rover
+   * @param {Moment} date
    * @memberof PhotosListContainer
    */
   getPhotos(rover, date) {
-    if (this.state.isFetching) {
-      return;
-    }
-
-    this.setState({
-      isFetching: true
-    });
-    getPhotos(rover, date).then((result) => {
-      this.setState({
-        isFetching: false,
-        photos: result
-      });
-    });
+    const {dispatch} = this.props;
+    dispatch(getPhotos(rover, date));
   }
   /**
-   * @overrides
+   * @override
    * @memberof PhotosListContainer
    */
-  componentDidMount() {
+  componentWillMount() {
     this.getPhotos(this.props.rover, this.props.date);
   }
   /**
-   * @overrides
+   * @override
+   * @params {Object} nextProps
    * @memberof PhotosListContainer
    */
-  componentWillReceiveProps(nextProps) {
+  componentWillUpdate(nextProps) {
     this.getPhotos(nextProps.rover, nextProps.date);
   }
   /**
+   * @override
    * @returns {Component}
    * @memberof PhotosListContainer
    */
   render() {
-    console.log('PhotoListContainer:render');
     return (
-      <PhotosList photos={this.state.photos} isFetching={this.state.isFetching} />
+      <PhotosList isFetching={this.props.isFetching} photos={this.props.photos} />
     );
   }
 }
 
-export default PhotosListContainer;
+const mapStateToProps = state => {
+  const {date, rover, photos} = state;
+  const photosKey = rover[0] + '-' + date.format(REQUEST_DATE_FORMAT);
+  return {
+    rover: rover,
+    date: date,
+    isFetching: photos.isFetching,
+    photos: photos[photosKey]
+  };
+};
+
+export default connect(mapStateToProps)(PhotosListContainer);

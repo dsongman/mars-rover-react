@@ -12,11 +12,7 @@ function renderPhotos(props) {
     return <p>Fetching…</p>;
   }
 
-  if (props.photos === null) {
-    return <p>There was an error fetching the photos.</p>;
-  }
-  
-  if (props.photos.length === 0) {
+  if (!props.photos || props.photos.length === 0) {
     return <p>No images found.</p>;
   }
 
