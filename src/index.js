@@ -8,14 +8,10 @@ import {LocaleProvider} from 'antd';
 import App from './components/App';
 
 import enUS from 'antd/lib/locale-provider/en_US';
-import rootReducer from './reducers';
+import configureStore from './configureStore';
 import registerServiceWorker from './registerServiceWorker';
-import {createStore} from 'redux';
 
-let store = createStore(
-  rootReducer,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-);
+const store = configureStore();
 
 ReactDOM.render(
   <Provider store={store}>
