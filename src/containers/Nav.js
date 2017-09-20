@@ -1,4 +1,4 @@
-import Nav from './Nav';
+import Nav from '../components/Nav';
 
 import {connect} from 'react-redux';
 import {setDate, setRover} from '../actions';
@@ -21,5 +21,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-const NavContainer = connect(mapStateToProps, mapDispatchToProps)(Nav);
-export default NavContainer;
+export default connect(mapStateToProps, mapDispatchToProps)(Nav);

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import PhotosList from './PhotosList';
+import PhotosList from '../components/PhotosList';
 
 import {connect} from 'react-redux';
 import {getPhotos, PHOTO_KEY_SEPARATOR, REQUEST_DATE_FORMAT} from '../actions';

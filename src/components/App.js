@@ -1,6 +1,6 @@
 import React, {PureComponent} from 'react';
-import NavContainer from './NavContainer';
-import PhotosListContainer from './PhotosListContainer';
+import NavContainer from '../containers/Nav';
+import PhotosListContainer from '../containers/PhotosList';
 
 import './App.css';
 
