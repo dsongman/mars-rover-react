@@ -21,6 +21,12 @@ function renderPhotos(props) {
   );
 }
 
+/**
+ * PhotosList Component
+ * 
+ * @param {any} props 
+ * @returns {Component}
+ */
 const PhotosList = props => (
   <div className="PhotosList">{renderPhotos(props)}</div>
 );

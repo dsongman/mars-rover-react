@@ -10,6 +10,7 @@ import './App.css';
  */
 class App extends PureComponent {
   /**
+   * @override
    * @returns {Component}
    * @memberof App
    */

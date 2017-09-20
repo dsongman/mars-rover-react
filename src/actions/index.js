@@ -1,5 +1,10 @@
 import {NASA_API_KEY} from '../_private';
+
+/**
+ * Misc. constants
+ */
 export const REQUEST_DATE_FORMAT = 'YYYY-MM-DD';
+export const PHOTO_KEY_SEPARATOR = '-';
 
 /**
  * @param {Moment} date 
@@ -14,7 +19,7 @@ export const setDate = date => {
 };
 
 /**
- * @param {String} rover 
+ * @param {Array} rover 
  * @returns {Object}
  */
 export const SET_ROVER = 'SET_ROVER';
@@ -26,7 +31,7 @@ export const setRover = rover => {
 };
 
 /**
- * @param {String} rover 
+ * @param {Array} rover 
  * @param {String} date 
  * @returns {Object}
  */
@@ -40,7 +45,7 @@ const requestPhotos = (rover, date) => {
 };
 
 /**
- * @param {String} rover 
+ * @param {Array} rover 
  * @param {String} date 
  * @param {JSON} json 
  * @returns {Object}
@@ -55,6 +60,13 @@ const receivePhotos = (rover, date, json) => {
   };
 };
 
+/**
+ * Fetches data from the NASA API
+ * 
+ * @param {String} rover 
+ * @param {String} date 
+ * @returns {Promise}
+ */
 const fetchPhotos = (rover, date) => {
   let url = `https://api.nasa.gov/mars-photos/api/v1/rovers/${rover}/photos?earth_date=${date}&api_key=${NASA_API_KEY}`;
   return dispatch => {
@@ -65,8 +77,15 @@ const fetchPhotos = (rover, date) => {
   };
 };
 
-export const PHOTO_KEY_SEPARATOR = '-';
-
+/**
+ * Returns true if the rover-date key isn't found in the cache and there isn't a request
+ * in progress.
+ * 
+ * @param {Object} state 
+ * @param {String} rover 
+ * @param {String} date 
+ * @returns {Boolean}
+ */
 const shouldFetchPhotos = (state, rover, date) => {
   const roverPhotos = state.photos;
   let photoKey = rover + PHOTO_KEY_SEPARATOR + date;
@@ -75,6 +94,14 @@ const shouldFetchPhotos = (state, rover, date) => {
   return !(hasPhotosOnDate || roverPhotos.isFetching);
 };
 
+/**
+ * Returns the array of photos given the rover and date.
+ * Will return the cached copy if available and will dispatch fetchPhotos if not.
+ * 
+ * @param {Array} rover 
+ * @param {Moment} date 
+ * @returns {Promise.<Object>}
+ */
 export const getPhotos = (rover, date) => {
   let _rover = rover[0];
   let _date = date.format(REQUEST_DATE_FORMAT);

@@ -2,6 +2,12 @@ import React from 'react';
 
 import './Photo.css';
 
+/**
+ * Photo Component
+ * 
+ * @param {Object} props 
+ * @returns {Component}
+ */
 const Photo = (props) => {
   let photo = props.photo;
   let imgSrc = photo.img_src;

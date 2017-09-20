@@ -2,6 +2,7 @@ import {SET_DATE} from '../actions';
 import moment from 'moment';
 
 const today = moment();
+
 /**
  * @param {Moment} [state=moment.now()] 
  * @param {Object} action 

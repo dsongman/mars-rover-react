@@ -10,7 +10,7 @@ import {getPhotos, PHOTO_KEY_SEPARATOR, REQUEST_DATE_FORMAT} from '../actions';
  */
 class PhotosListContainer extends Component {
   /**
-   * Dispatches the getPhotos action.
+   * Dispatches the getPhotos action
    * 
    * @param {Array} rover
    * @param {Moment} date
@@ -47,6 +47,12 @@ class PhotosListContainer extends Component {
   }
 }
 
+/**
+ * State properties converted to props for this component.
+ * 
+ * @param {Object} state 
+ * @returns {Object}
+ */
 const mapStateToProps = state => {
   const {date, rover, photos} = state;
   const photosKey = rover[0] + PHOTO_KEY_SEPARATOR + date.format(REQUEST_DATE_FORMAT);
